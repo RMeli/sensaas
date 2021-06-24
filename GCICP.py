@@ -7,10 +7,13 @@ import numpy as np
 
 def preprocess_point_cloud(pcd, voxel_size):
     
+    voxel_size = 0.5 # grid resolution
+
     #open0.7
     #pcd_down = o3d.geometry.voxel_down_sample(pcd, voxel_size)
     #open0.12
-    pcd_down = pcd.voxel_down_sample(voxel_size)
+    #pcd_down = pcd.voxel_down_sample(voxel_size)
+    pcd_down = pcd
     
     radius_normal = voxel_size * 2
     
@@ -27,11 +30,13 @@ def preprocess_point_cloud(pcd, voxel_size):
     return pcd_down, pcd_fpfh
 
 def prepare_dataset(spcd,tpcd,voxel_size):
+    voxel_size = 0.5
     source_down, source_fpfh = preprocess_point_cloud(spcd, voxel_size)
     target_down, target_fpfh = preprocess_point_cloud(tpcd, voxel_size)
     return spcd, tpcd, source_down, target_down, source_fpfh, target_fpfh
 
 def execute_global_registration(source_down, target_down, source_fpfh, target_fpfh, voxel_size):
+    vixel_size=0.5
     distance_threshold = voxel_size * 1.5
     #open0.7
     #result = o3d.registration.registration_ransac_based_on_feature_matching(
@@ -53,6 +58,7 @@ def execute_global_registration(source_down, target_down, source_fpfh, target_fp
     return result
 
 def colored_point_cloud(source_down,target_down,globaltran,voxel_size):
+    voxel_size=0.5
     max_iter = 100
     radius = voxel_size * 2
     
