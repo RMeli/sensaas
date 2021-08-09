@@ -12,9 +12,15 @@ def save_trans_sdf(SDFfile,tran,output):
 
     tabLignesSdf=[]
     tabLignesSdf.append(re.split('\s+', getstr[3].strip()))
+    testspace=[]
+    testspace.append(re.split('', getstr[3]))
     if(len(tabLignesSdf[0][0]) > 2):
-        tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
-        tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
+        if(testspace[0][1]==' '):
+            tabLignesSdf[0][1]=tabLignesSdf[0][0][2:]
+            tabLignesSdf[0][0]=tabLignesSdf[0][0][0:2]
+        else:
+            tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
+            tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
         nbatom=int(tabLignesSdf[0][0])
         nbbond=int(tabLignesSdf[0][1])
     else:

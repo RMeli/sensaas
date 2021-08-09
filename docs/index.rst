@@ -343,6 +343,11 @@ You may have to run the script as follows:
 ::
 	python utils/ordered-catsensaas.py matrix-sensaas.txt catsensaas.sdf
 	
+or if you want to only retrieve solutions having a gfit+hfit score above a defined cutoff
+::
+
+	python utils/ordered-catsensaas-cutoff.py matrix-sensaas.txt catsensaas.sdf 1.1
+
 - the file **ordered-catsensaas.sdf** contains all aligned Sources in descending order of score
 - the file **ordered-scores.txt** contains the original number of Source with gfit+hfit scores in descending order
 
@@ -413,6 +418,7 @@ To visualize the results, you can use any molecular viewer. For instance, you ca
 ::
 	pymol examples/VALSARTAN.sdf sensaas-1.sdf sensaas-2.sdf sensaas-3.sdf
 
+.. image:: _static/valsartan-tetrazole.png
 
 Miscellaneous Tools
 --------------------

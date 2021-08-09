@@ -40,10 +40,15 @@ def sdfsurface(filesdf,nscexe):
     while(compt < len(getstr)):
         tabLignesSdf.append(re.split('\s+', getstr[compt].strip()))
         compt=compt+1
-    
+    testspace=[]
+    testspace.append(re.split('', getstr[3]))
     if(len(tabLignesSdf[0][0]) > 2):
-        tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
-        tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
+        if(testspace[0][1]==' '):
+            tabLignesSdf[0][1]=tabLignesSdf[0][0][2:]
+            tabLignesSdf[0][0]=tabLignesSdf[0][0][0:2]
+        else:
+            tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
+            tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
         nbatomes=int(tabLignesSdf[0][0])
         nbLiaisons=int(tabLignesSdf[0][1])
     else:
