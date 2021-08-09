@@ -10,3 +10,12 @@ matrix-sensaas.txt
 tmps.sdf
 tmpt.sdf
 bestsensaas.sdf
+
+# Python
+__pycache__
+
+# macOS
+.DS_Store
+
+# editors
+.vscode

@@ -40,24 +40,38 @@ from XYZRGB2labels import *
 from SDFtoDots import *
 from PDBtoDots import *
 
-ARGV=[]
-try:
-    ARGV.append(sys.argv[1])
-    filesdf=ARGV[0]
-except:
-    print('usage: sensaas.py target-type target-file-name source-type source-file-name slog optim \neg:\nsensaas.py sdf DATASET/IMATINIB.sdf sdf DATASET/IMATINIB-part1.sdf slog optim')
-    quit()
+import argparse
+
+# List of supported file types for source and target
+filetypes = ["sdf", "pdb", "dot", "xyzrgb", "pcd"]
+
+p = argparse.ArgumentParser(
+    description="SenSaaS: Shape-based Alignment by Registration of Colored Point-based Surfaces"
+)
+p.add_argument("targettype", type=str, help="Target file type", choices=filetypes)
+p.add_argument("target", type=str, help="Target file")
+p.add_argument("sourcetype", type=str, help="Source file type", choices=filetypes)
+p.add_argument("source", type=str, help="Source file")
+p.add_argument("output", type=str, help="Output (log file)")
+p.add_argument("mode", type=str, help="Mode", choices=["optim", "eval"])
+p.add_argument("-v", "--verbose", action="store_true", help="Verbose mode (keep all files)")
+p.add_argument("-t", "--threshold", type=float, default=0.3, help="Threshold to evaluate correspondence set")
+p.add_argument("-vs", "--voxel_sizes", type=float, nargs="+",
+               default=[0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2],
+               help="Threshold to evaluate correspondence set")
+
+args = p.parse_args()
 
 # sys.argv[0] is the name of the program itself
-sensaasexe=sys.argv[0]
+sensaasexe = p.prog  # p.prog defaults to sys.argv[0])
 sensaasexe=re.sub('sensaas\.py','',sensaasexe)
 
-targettype=sys.argv[1]
-target=sys.argv[2]
-sourcetype=sys.argv[3]
-source=sys.argv[4]
-output=sys.argv[5]
-mode=sys.argv[6]
+targettype = args.targettype
+target = args.target
+sourcetype = args.sourcetype
+source = args.source
+output = args.output
+mode = args.mode
 
 #sensaasexe="./"
 #if environment variable is set (eg: .bashr SENSAASBASE=/home/user/sensaas-executables )
@@ -78,7 +92,7 @@ else:
 #print(nscexe)
 
 #verbose=0 (keep important files only) or verbose=1
-verbose=0
+verbose = 1 if args.verbose else 0
 
 #######################################
 # MAIN program
@@ -91,7 +105,7 @@ fd.write('Open3D version %s\n' % (o3d.__version__))
 
 #threshold to evaluate correspondence set = dots that match (fitness and rmse) in GCICP.py
 # molecular surface space between dots = 0.3 then threshold = 0.3-0.4
-threshold = 0.3
+threshold = args.threshold
 
 fd.write("#label 1 {H, Cl, Br, I}\n")
 fd.write("#label 2 {O, N, S, F, HO, HN}\n")
@@ -218,7 +232,7 @@ fd.close()
 #mode = optimisation (default)
 if mode != 'eval' :
     ## gcicp = Global + CICP registration (see subroutines)
-    tran=gcicp_registration(source_pcd,target_pcd,threshold,output,pcds2,pcds3,pcds4,pcdt2,pcdt3,pcdt4,Slabel2,Slabel3,Slabel4)
+    tran=gcicp_registration(source_pcd,target_pcd,threshold,output,pcds2,pcds3,pcds4,pcdt2,pcdt3,pcdt4,Slabel2,Slabel3,Slabel4, args.voxel_sizes)
 else:
     tran=np.identity(4)
 
