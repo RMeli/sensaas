@@ -45,14 +45,7 @@ sensaasexe=re.sub('meta-sensaas\.py','',sensaasexe)
 #sensaasexe="./"
 #if environment variable is set (eg: .bashr SENSAASBASE=/home/user/sensaas-executables )
 #sensaasexe=os.environ['SENSAASBASE'] + "/"
-whichexe='linux'
-if(whichexe in platform):
-    # linux
-    sensaasexe=sensaasexe+ "sensaas.py"
-else:
-    #windows
-    sensaasexe="python " + sensaasexe+ "sensaas.py"
-#print(sensaasexe)
+sensaasexe="python " + sensaasexe + "sensaas.py"
 
 #verbose=0 (keep important files only) or verbose=1
 verbose=0
