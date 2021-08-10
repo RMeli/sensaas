@@ -241,9 +241,6 @@ fd = open(output, 'a')
 #fitness for all dots (no color)
 #print("Threshold for evaluation (maximum correspondence points-pair distance) = %3.3f" % (threshold))
 fd.write('\nSelected solution (best gfit + hfit):\n')
-#open0.7
-#score=o3d.registration.evaluate_registration(source_pcd,target_pcd,threshold,tran)
-#open0.12 add ".pipelines"
 score=o3d.pipelines.registration.evaluate_registration(source_pcd,target_pcd,threshold,tran)
 fitness=score.fitness
 rmse=score.inlier_rmse
@@ -255,9 +252,6 @@ fd.write('gfit %3.3f Source_matching_all_dots= %5s rmse_all_dots= %3.3f (Target_
 #fitness for each group of color
 
 #label 1
-#open0.7
-#score=o3d.registration.evaluate_registration(pcds1,pcdt1,threshold,tran)
-#open0.12
 score=o3d.pipelines.registration.evaluate_registration(pcds1,pcdt1,threshold,tran)
 fitness1=score.fitness
 rmse1=score.inlier_rmse
@@ -266,9 +260,6 @@ dots1=len(score.correspondence_set)
 fd.write('fit_label1 %3.3f Source_matching_dots_label1= %5s rmse_label1= %3.3f\n' % (fitness1,dots1,rmse1))
 
 #label 2
-#open0.7
-#score=o3d.registration.evaluate_registration(pcds2,pcdt2,threshold,tran)
-#open0.12
 score=o3d.pipelines.registration.evaluate_registration(pcds2,pcdt2,threshold,tran)
 fitness2=score.fitness
 rmse2=score.inlier_rmse
@@ -277,9 +268,6 @@ dots2=len(score.correspondence_set)
 fd.write('fit_label2 %3.3f Source_matching_dots_label2= %5s rmse_label2= %3.3f\n' % (fitness2,dots2,rmse2))
 
 #label 3
-#open0.7
-#score=o3d.registration.evaluate_registration(pcds3,pcdt3,threshold,tran)
-#open0.12
 score=o3d.pipelines.registration.evaluate_registration(pcds3,pcdt3,threshold,tran)
 fitness3=score.fitness
 rmse3=score.inlier_rmse
@@ -288,9 +276,6 @@ dots3=len(score.correspondence_set)
 fd.write('fit_label3 %3.3f Source_matching_dots_label3= %5s rmse_label3= %3.3f\n' % (fitness3,dots3,rmse3))
 
 #label 4
-#open0.7
-#score=o3d.registration.evaluate_registration(pcds4,pcdt4,threshold,tran)
-#open0.12
 score=o3d.pipelines.registration.evaluate_registration(pcds4,pcdt4,threshold,tran)
 fitness4=score.fitness
 rmse4=score.inlier_rmse
