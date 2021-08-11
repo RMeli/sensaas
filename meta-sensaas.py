@@ -510,7 +510,11 @@ else:
         
             #execute sensaas
             cmd = '%s sdf tmpt.sdf sdf tmps.sdf slog optim' % (sensaasexe)
-            os.system(cmd)
+            c = os.system(cmd)
+
+            if c != 0: # sensaas.py failed
+                print(f"{cmd}\n\tfailed with code {c}")
+                continue # go to next molecule
 
             #read last line of slog and fill table scoregh, scoreg, scoreh (scoreght, scoregt scoreht if score_type= "mean" or "target") 
             logfile=open('slog', 'r')
