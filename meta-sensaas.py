@@ -514,6 +514,11 @@ else:
 
             if c != 0: # sensaas.py failed
                 print(f"{cmd}\n\tfailed with code {c}")
+
+                # Add empty molecule for bookkeeping
+                with open(output, 'a') as catfile:
+                    catfile.write("\n     RDKit          2D\n\n  0  0  0  0  0  0  0  0  0  0999 V2000\nM  END\n$$$$")
+
                 continue # go to next molecule
 
             #read last line of slog and fill table scoregh, scoreg, scoreh (scoreght, scoregt scoreht if score_type= "mean" or "target") 
