@@ -9,6 +9,7 @@ import re
 from sys import platform
 import math
 import random
+import numpy as np
 
 # sys.argv[0] is the name of the program itself
 target=sys.argv[1]
@@ -514,6 +515,10 @@ else:
 
             if c != 0: # sensaas.py failed
                 print(f"{cmd}\n\tfailed with code {c}")
+
+                scoregfithfit.append(-np.inf)
+                scoregfit.append(-np.inf)
+                scorehfit.append(-np.inf)
 
                 # Add empty molecule for bookkeeping
                 with open(output, 'a') as catfile:
