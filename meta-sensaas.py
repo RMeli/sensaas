@@ -521,12 +521,19 @@ else:
             print ("%s %s - %s %s score-source %s" % (target,i,source,j,score))
             tabscore=[]
             tabscore.append(re.split('\s+', score.strip()))
+            sensaasfail=0
             #scores of source
-            scoregfithfit.append(tabscore[0][7])
-            scoregfit.append(tabscore[0][1])
-            scorehfit.append(tabscore[0][5])
+            if(len(tabscore[0])<7):
+                sensaasfail=1
+                scoregfithfit.append(0)
+                scoregfit.append(0)
+                scorehfit.append(0)
+            else:
+                scoregfithfit.append(tabscore[0][7])
+                scoregfit.append(tabscore[0][1])
+                scorehfit.append(tabscore[0][5])
         
-            if(score_type=="mean" or score_type=="target"):
+            if((score_type=="mean" or score_type=="target") and sensaasfail==0):
                 #eval target
                 #execute sensaas
                 cmd = '%s sdf Source_tran.sdf sdf tmpt.sdf slog eval' % (sensaasexe)
@@ -608,7 +615,10 @@ else:
             k=k+1
             #concatenate Source_tran.sdf in catsensaas.sdf
             lignesol=[]
-            solfile=open('Source_tran.sdf', 'r')
+            if(sensaasfail==0):
+                solfile=open('Source_tran.sdf', 'r')
+            else:
+                solfile=open('tmps.sdf', 'r')
             lignesol=solfile.readlines()
             solfile.close()
             catfile=open(output, 'a')
@@ -618,9 +628,10 @@ else:
             
             #clean
             os.remove("tmps.sdf")
-            os.remove("Source_tran.sdf")
-            os.remove("tran.txt")
-            os.remove("slog")
+            if(sensaasfail==0):
+                os.remove("Source_tran.sdf")
+                os.remove("tran.txt")
+                os.remove("slog")
 
         os.remove("tmpt.sdf")
 

@@ -18,7 +18,7 @@ def save_trans_sdf(SDFfile,tran,output):
         if(testspace[0][1]==' '):
             tabLignesSdf[0][1]=tabLignesSdf[0][0][2:]
             tabLignesSdf[0][0]=tabLignesSdf[0][0][0:2]
-        else:
+        elif(testspace[0][4]!=' '):
             tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
             tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
         nbatom=int(tabLignesSdf[0][0])

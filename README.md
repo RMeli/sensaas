@@ -1,4 +1,4 @@
-## SENSAAS
+# SENSAAS
 
 Custom version of [SENSAAS](https://github.com/SENSAAS/sensaas).
 

@@ -46,7 +46,7 @@ def sdfsurface(filesdf,nscexe):
         if(testspace[0][1]==' '):
             tabLignesSdf[0][1]=tabLignesSdf[0][0][2:]
             tabLignesSdf[0][0]=tabLignesSdf[0][0][0:2]
-        else:
+        elif(testspace[0][4]!=' '):
             tabLignesSdf[0][1]=tabLignesSdf[0][0][3:]
             tabLignesSdf[0][0]=tabLignesSdf[0][0][:3]
         nbatomes=int(tabLignesSdf[0][0])

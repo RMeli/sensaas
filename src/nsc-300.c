@@ -889,13 +889,13 @@ int i;
      }
 }
 
-int main(int argc,char **argv){
+main(int argc,char **argv){
 
   int i;
   double area, volume;
   double * at_area;
   double * dots;
-  int    density = 600, ndots;
+  int    density = 300, ndots;
   FILE *fp;
 
 if (!(in_str=fopen(argv[1],"r")))
